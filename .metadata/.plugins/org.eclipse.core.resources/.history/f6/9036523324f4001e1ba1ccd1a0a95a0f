@@ -1,0 +1,5 @@
+package com.mycompany.product.model;
+
+public class Credentials {
+
+}

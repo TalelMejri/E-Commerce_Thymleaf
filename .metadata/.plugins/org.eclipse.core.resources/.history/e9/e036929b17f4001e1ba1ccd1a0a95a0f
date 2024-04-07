@@ -1,0 +1,10 @@
+package com.mycompany.product.repository;
+
+import com.mycompany.product.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    // Ajoutez ici des méthodes personnalisées de requête si nécessaire
+}

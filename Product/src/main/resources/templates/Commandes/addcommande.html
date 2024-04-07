@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une commande</title>
+</head>
+<body>
+<h2>Ajouter une commande</h2>
+<form th:action="@{/orders/add}" method="post">
+    <label>Client:</label>
+    <select name="clientId">
+        <!-- Inclure une liste des clients disponibles -->
+        <option value="1">Client 1</option>
+        <option value="2">Client 2</option>
+        <!-- Vous pouvez charger dynamiquement cette liste depuis la base de données -->
+    </select><br>
+    <label>Date de commande:</label>
+    <input type="text" name="orderDate" required><br>
+    <label>Montant total:</label>
+    <input type="text" name="totalAmount" required><br>
+    <label>Statut de la commande:</label>
+    <input type="text" name="orderStatus" required><br>
+    <label>Méthode de paiement:</label>
+    <input type="text" name="paymentMethod" required><br>
+    <label>Adresse de livraison:</label>
+    <input type="text" name="deliveryAddress" required><br>
+    <button type="submit">Ajouter</button>
+</form>
+</body>
+</html>
+

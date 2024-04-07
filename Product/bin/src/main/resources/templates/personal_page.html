@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal page</title>
+</head>
+<body>
+<h1>Welcome to the personal page <span th:text="${userLogin}"></span></h1>
+<div class="menu">
+    <h1>Menu Application</h1>
+    <ul>
+        <li><a href="/categories/list_category">Gestion des catégories</a></li> <!-- Modifiez le chemin -->
+        <li><a href="/Products/List_Products">Gestion des produits</a></li> <!-- Modifiez le chemin -->
+        <li><a href="/Commandes/listcommande">Gestion des ventes</a></li> <!-- Modifiez le chemin -->
+        <li><a href="/users/list_user">Gestion des utilisateurs</a></li> <!-- Modifiez le chemin -->
+    </ul>
+    <form action="/api/auth/logout" method="post"> <!-- Modifiez le chemin pour le logout -->
+        <input type="submit" value="Quitter">
+    </form>
+
+</div>
+</body>
+</html>

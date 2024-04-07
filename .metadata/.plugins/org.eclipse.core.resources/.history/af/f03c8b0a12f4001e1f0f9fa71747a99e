@@ -1,0 +1,56 @@
+//package com.mycompany.product.controller;
+//
+//import com.mycompany.product.model.Produit;
+//import com.mycompany.product.service.ProduitService;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.*;
+//
+//import java.util.List;
+//
+//@Controller
+//@RequestMapping("/Products")
+//public class ProduitController {
+//
+//    @Autowired
+//    private ProduitService produitService;
+//
+//    @GetMapping("/Products/List_Products")
+//    public String getAllProduits(Model model) {
+//        List<Produit> produits = produitService.getAllProduits();
+//        model.addAttribute("produits", produits);
+//        return "Products/List_Products";
+//    }
+//
+//    @GetMapping("/edit/{id}")
+//    public String editProduit(@PathVariable Long id, Model model) {
+//        Produit produit = produitService.getProduitById(id);
+//        model.addAttribute("produit", produit);
+//        return "Products/editProduct";
+//    }
+//
+//    @PostMapping("/edit")
+//    public String updateProduit(@ModelAttribute Produit produit) {
+//        produitService.updateProduit(produit);
+//        return "redirect:/Products/List";
+//    }
+//
+//    @GetMapping("/delete/{id}")
+//    public String deleteProduit(@PathVariable Long id) {
+//        produitService.deleteProduit(id);
+//        return "redirect:/Products/List";
+//    }
+//
+//    @GetMapping("/add")
+//    public String addProduitForm(Model model) {
+//        model.addAttribute("produit", new Produit());
+//        return "Products/addProduct";
+//    }
+//
+//    @PostMapping("/add")
+//    public String addProduit(@ModelAttribute("Products")Produit produit) {
+//        produitService.addProduit(produit);
+//        return "redirect:/Products/List_Products";
+//    }
+//}

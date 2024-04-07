@@ -1,0 +1,5 @@
+package com.mycompany.product.config;
+
+public class SecurityConfig {
+
+}

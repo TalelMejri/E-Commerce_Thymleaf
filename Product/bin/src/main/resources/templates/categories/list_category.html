@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des catégories</title>
+</head>
+<body>
+<h2>Gestion des catégories</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Référence</th>
+        <th>Quantité</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Nom Image</th>
+        <th>Action</th>
+    </tr>
+    <!-- Boucle sur la liste des catégories pour afficher chaque catégorie -->
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.id}"></td>
+        <td th:text="${category.name}"></td>
+        <td th:text="${category.reference}"></td>
+        <td th:text="${category.quantity}"></td>
+        <td th:text="${category.description}"></td>
+        <td th:text="${category.nomPhoto}"></td>
+        <td>
+            <img th:src="${category.photo}" alt="Photo du categorie" style="max-width: 100px; max-height: 100px;">
+        </td>
+        <td>
+            <a th:href="@{'/categories/edit_category/' + ${category.id}}">Modifier</a>
+
+            <a th:href="@{'/categories/delete_category/' + ${category.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?')">Supprimer</a>
+        </td>
+    </tr>
+</table>
+<a href="/categories/add_category">Ajouter une catégorie</a>
+<a href="/categories/personal">Quitter</a>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        /* Add CSS styling here */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Shopping Cart</h1>
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Action</th>
+    </tr>
+    <!-- Use server-side code to dynamically populate this table -->
+    <tr>
+        <td>Product Name</td>
+        <td>2</td>
+        <td>$20.00</td>
+        <td>$40.00</td>
+        <td><button>Delete</button></td>
+    </tr>
+    <!-- Add more rows dynamically based on the number of items in the shopping cart -->
+</table>
+<p>Total: $40.00</p>
+<form action="/checkout" method="post">
+    <button type="submit">Checkout</button>
+</form>
+</body>
+</html>

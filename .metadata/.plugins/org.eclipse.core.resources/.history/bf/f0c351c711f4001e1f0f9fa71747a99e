@@ -1,0 +1,10 @@
+package com.mycompany.product.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.mycompany.product.model.Commande;
+import com.mycompany.product.model.User;
+
+public interface CommandeRepo  extends JpaRepository<Commande, Long> {
+
+}

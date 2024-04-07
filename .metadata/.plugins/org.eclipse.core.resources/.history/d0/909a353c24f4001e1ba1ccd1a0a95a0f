@@ -1,0 +1,7 @@
+package com.mycompany.product.model;
+
+public class Credentials {
+
+	String email;
+	String password;
+}

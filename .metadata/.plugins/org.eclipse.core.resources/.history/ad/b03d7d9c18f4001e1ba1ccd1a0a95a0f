@@ -1,0 +1,122 @@
+package com.mycompany.product.model;
+
+import jakarta.persistence.*;
+
+import java.util.Arrays;
+import java.util.List;
+
+@Entity
+@Table(name = "categories")
+public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String reference; // Changement de description à reference
+    private int quantity; // Ajout de quantité
+    private String description;
+    private String nomPhoto;
+    @Lob
+    private byte[] photo;
+
+
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
+
+    // Constructeur par défaut
+    public Category() {
+    }
+
+    // Constructeur avec paramètres
+    public Category(String name, String reference, int quantity, String description, String nomPhoto, byte[] photo
+                    ) {
+        this.name = name;
+        this.reference = reference;
+        this.quantity = quantity;
+        this.description = description;
+        this.nomPhoto = nomPhoto;
+        this.photo = photo;
+
+    }
+
+    // Getters et setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public String getNomPhoto() {
+        return nomPhoto;
+    }
+
+    public void setNomPhoto(String nomPhoto) {
+        this.nomPhoto = nomPhoto;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", reference='" + reference + '\'' +
+                ", quantity=" + quantity +
+                ", description='" + description + '\'' +
+                ", nomPhoto='" + nomPhoto + '\'' +
+                ", photo=" + Arrays.toString(photo) +
+                ", products=" + products +
+                '}';
+    }
+}

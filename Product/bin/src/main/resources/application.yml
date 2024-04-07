@@ -1,0 +1,29 @@
+# Spring datasource configuration
+spring:
+  application:
+    name: Product
+  datasource:
+    url: jdbc:postgresql://localhost:5432/product_db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 123456
+  jpa:
+    open-in-view: false
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+## Spring security configuration
+#security:
+#  user:
+#    name: user
+#    password: password
+#  roles: ROLE_USER
+
+# Logging configuration
+logging:
+  level:
+    root: INFO # Root logging level
+    org.springframework.web: DEBUG # Spring Web logging level
+server:
+  port : 9099

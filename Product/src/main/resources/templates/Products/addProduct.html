@@ -1,0 +1,68 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Add Product</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Add Product</h1>-->
+<!--<form action="/Products/add" method="post"> &lt;!&ndash; Corriger le chemin d'action &ndash;&gt;-->
+<!--    <label for="designation">Designation:</label><br>-->
+<!--    <input type="text" id="designation" name="designation"><br>-->
+<!--    <label for="description">Description:</label><br>-->
+<!--    <textarea id="description" name="description"></textarea><br>-->
+<!--    <label for="prix">Price:</label><br>-->
+<!--    <input type="number" id="prix" name="prix"><br>-->
+<!--    <label for="selected">Selected:</label><br>-->
+<!--    <input type="checkbox" id="selected" name="selected"><br>-->
+<!--    <label for="photo">Photo:</label><br>-->
+<!--    <input type="file" id="photo" name="photo"><br>-->
+<!--    <label for="quantite">Quantity:</label><br>-->
+<!--    <input type="number" id="quantite" name="quantite"><br>-->
+<!--    <label for="category">Catégorie:</label><br>-->
+<!--    <select id="category" name="category" required>-->
+<!--        <option value="">Sélectionnez une catégorie</option>-->
+<!--        <option th:each="category : ${categories}" th:value="${category.idCategorie}" th:text="${category.nomCategorie}"></option>-->
+<!--    </select><br><br>-->
+<!--    <button type="submit">Add Product</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Produit</title>
+</head>
+<body>
+
+<h2>Ajouter un Produit</h2>
+
+<form action="/Products/addProduct" method="post" >
+    <label for="name">Nom:</label><br>
+    <input type="text" id="name" name="name" required><br>
+    <label for="reference">Référence:</label><br>
+    <input type="text" id="reference" name="reference" required><br>
+    <label for="price">Prix:</label><br>
+    <input type="number" id="price" name="price" min="0" step="0.01" required><br>
+    <label for="quantity">Quantité en Stock:</label><br>
+    <input type="number" id="quantity" name="quantityInStock" min="0" required><br>
+    <label for="category">Catégorie:</label><br>
+    <select id="category" name="category" required>
+        <option value="">Sélectionnez une catégorie</option>
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select><br><br>
+
+
+    <label for="photo">Photo:</label><br>
+      <input type="file" id="photo" name="photo"><br>
+    <button type="submit">Ajouter</button>
+</form>
+<a href="/Products/List_Products">Retour à la liste des produits</a>
+<a href="/Products/personal">Quitter</a>
+</body>
+</html>

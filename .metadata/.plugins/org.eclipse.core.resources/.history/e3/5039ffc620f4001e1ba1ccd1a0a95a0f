@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register page</title>
+<!--    <link rel="stylesheet" href="/style.css"> &lt;!&ndash; Assurez-vous que le chemin vers votre fichier CSS est correct &ndash;&gt;-->
+</head>
+<body>
+<div class="form">
+    <form action="/register" method="post" th:object="${registerRequest}">
+        <h2>Register</h2>
+        <div class="input-box">
+            <input type="text" name="username" placeholder="Username" th:field="*{username}" required>
+        </div>
+        <div class="input-box">
+            <input type="password" name="password" placeholder="Password" th:field="*{password}" required>
+        </div>
+
+        <div class="input-box">
+            <input type="email" name="email" placeholder="Email"  th:field="*{email}"required>
+        </div>
+
+        <div class="input-box">
+            <input type="submit" name="sign-up" value="Register">
+        </div>
+        <p>Already have an account? <a href="/login">Navigate to login</a></p> <!-- Modifiez le chemin -->
+    </form>
+</div>
+
+</body>
+</html>

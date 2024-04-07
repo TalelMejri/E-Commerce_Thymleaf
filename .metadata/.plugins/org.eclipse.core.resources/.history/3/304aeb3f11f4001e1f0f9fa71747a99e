@@ -1,0 +1,111 @@
+package com.mycompany.product.model;
+
+import jakarta.persistence.*;
+
+import java.io.Serializable;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name="produits")
+public class Produit implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id_produit;
+
+    private String description;
+    @NotEmpty
+    @Size(min=4,max=15)
+    private String designation;
+    private String photo;
+    private double prix;
+    private int quantite;
+    private boolean selected;
+
+
+    @ManyToOne
+    @JoinColumn(name="idCategorie")
+    private Categorie categorie;
+
+    public Long getId_produit() {
+        return id_produit;
+    }
+
+    public void setId_produit(Long id_produit) {
+        this.id_produit = id_produit;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+    public Produit() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+    public Produit(String designation, String description, double prix,
+                   boolean selected, String photo, int quantite) {
+        super();
+        this.designation = designation;
+        this.description = description;
+        this.prix = prix;
+        this.selected = selected;
+        this.photo = photo;
+        this.quantite = quantite;
+        this.categorie = categorie;
+    }
+
+
+}

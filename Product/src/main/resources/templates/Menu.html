@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Application</title>
+    <!--    <link rel="stylesheet" href="/style.css"> &lt;!&ndash; Modifiez le chemin du fichier CSS &ndash;&gt;-->
+</head>
+<body>
+<div class="menu">
+    <h1>Menu Application</h1>
+    <ul>
+        <li><a href="/categories/list_category">Gestion des catégories</a></li> <!-- Modifiez le chemin -->
+        <li><a href="/products/list_products">Gestion des produits</a></li> <!-- Modifiez le chemin -->
+        <li><a href="/sales">Gestion des ventes</a></li> <!-- Modifiez le chemin -->
+        <li><a href="/users/list_user">Gestion des utilisateurs</a></li> <!-- Modifiez le chemin -->
+    </ul>
+    <form action="/api/auth/logout" method="post"> <!-- Modifiez le chemin pour le logout -->
+        <input type="submit" value="Quitter">
+    </form>
+
+</div>
+</body>
+</html>

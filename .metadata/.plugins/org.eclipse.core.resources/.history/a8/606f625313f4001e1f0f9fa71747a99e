@@ -1,0 +1,32 @@
+package com.mycompany.product.dao;
+
+import com.mycompany.product.model.*;
+
+import java.util.Date;
+import java.util.List;
+
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+public class BoutiqueDaoImplementation implements IBoutiqueDAO {
+
+    @PersistenceContext
+    private EntityManager em;
+
+    public Commande enregistrerCommande(Panier p, User c) {
+        em.persist(c);
+        Commande cmd = new Commande();
+        cmd.setDateCommande(new Date());
+        cmd.setItems(p.getItems());
+        for (LigneCommande lc : p.getItems()) {
+            em.persist(lc);
+        }
+        em.persist(cmd);
+        return cmd;
+    }
+
+
+
+}

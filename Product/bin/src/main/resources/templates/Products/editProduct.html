@@ -1,0 +1,63 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Edit Product</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Edit Product</h1>-->
+<!--<form action="/editProduct" method="post">-->
+<!--    <input type="hidden" name="productId" value="1"> &lt;!&ndash; Hidden field for product ID &ndash;&gt;-->
+<!--    <label for="designation">Designation:</label><br>-->
+<!--    <input type="text" id="designation" name="designation" value="Product Name"><br>-->
+<!--    <label for="description">Description:</label><br>-->
+<!--    <textarea id="description" name="description">Product Description</textarea><br>-->
+<!--    <label for="prix">Price:</label><br>-->
+<!--    <input type="number" id="prix" name="prix" value="0"><br>-->
+<!--    <label for="selected">Selected:</label><br>-->
+<!--    <input type="checkbox" id="selected" name="selected" checked><br>-->
+<!--    <label for="photo">Photo:</label><br>-->
+<!--    <input type="file" id="photo" name="photo"><br>-->
+<!--    <label for="quantite">Quantity:</label><br>-->
+<!--    <input type="number" id="quantite" name="quantite" value="0"><br>-->
+<!--    <button type="submit">Update Product</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier un Produit</title>
+    <link href="/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<h2>Modifier un Produit</h2>
+
+<form action="/Products/editProduct/${product.id}" method="post">
+    <input type="hidden" name="id" th:value="${product.id}">
+    <label>Nom:</label>
+    <input type="text" name="name" th:value="${product.name}"><br>
+    <label>Référence:</label>
+    <input type="text" name="reference" th:value="${product.reference}"><br>
+    <label>Quantité en Stock:</label>
+    <input type="number" name="quantity" th:value="${product.quantityInStock}"><br>
+    <label>Prix:</label>
+    <input type="number" name="price" th:value="${product.price}"><br>
+    <label for="category">Catégorie:</label><br>
+    <select id="category" name="category" required>
+        <option value="">Sélectionnez une catégorie</option>
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select><br><br>
+    <label for="photo">Photo:</label><br>
+        <input type="file" id="photo" name="photo"th:value="${product.photo}"><br><br>
+        <button type="submit">Enregistrer</button>
+    </form>
+    <a href="/Products/List_Products">Retour à la liste des produits</a>
+    </body>
+    </html>

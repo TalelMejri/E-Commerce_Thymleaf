@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Supprimer un utilisateur</title>
+</head>
+<body>
+<h2>Confirmation de suppression</h2>
+<p>Êtes-vous sûr de vouloir supprimer cet utilisateur ?</p>
+<form action="/users/delete" method="post">
+    <input type="hidden" id="id" name="id" th:value="${user.id}">
+    <input type="submit" value="Confirmer">
+</form>
+<a href="/users">Annuler</a>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Produits - Gestion de Vente</title>-->
+<!--    <style>-->
+<!--        /* Styles pour l'organisation */-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        header {-->
+<!--            background-color: #333;-->
+<!--            color: #fff;-->
+<!--            padding: 10px 20px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        nav {-->
+<!--            background-color: #f4f4f4;-->
+<!--            padding: 10px 20px;-->
+<!--            overflow: hidden;-->
+<!--        }-->
+
+<!--        nav a {-->
+<!--            color: #333;-->
+<!--            text-decoration: none;-->
+<!--            padding: 10px 20px;-->
+<!--            margin-right: 10px;-->
+<!--            border-radius: 5px;-->
+<!--            transition: background-color 0.3s;-->
+<!--        }-->
+
+<!--        nav a:hover {-->
+<!--            background-color: #ddd;-->
+<!--        }-->
+
+<!--        section {-->
+<!--            padding: 20px;-->
+<!--        }-->
+
+<!--        h2 {-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        table {-->
+<!--            width: 100%;-->
+<!--            border-collapse: collapse;-->
+<!--        }-->
+
+<!--        th, td {-->
+<!--            padding: 8px;-->
+<!--            text-align: left;-->
+<!--            border-bottom: 1px solid #ddd;-->
+<!--        }-->
+
+<!--        th {-->
+<!--            background-color: #f4f4f4;-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        tr:hover {-->
+<!--            background-color: #f2f2f2;-->
+<!--        }-->
+
+<!--        /* Styles spécifiques à l'interface de gestion de vente */-->
+<!--        .button {-->
+<!--            background-color: #007bff;-->
+<!--            color: #fff;-->
+<!--            border: none;-->
+<!--            padding: 10px 20px;-->
+<!--            text-align: center;-->
+<!--            text-decoration: none;-->
+<!--            display: inline-block;-->
+<!--            font-size: 16px;-->
+<!--            margin-bottom: 10px;-->
+<!--            cursor: pointer;-->
+<!--            border-radius: 5px;-->
+<!--            transition: background-color 0.3s;-->
+<!--        }-->
+
+<!--        .button:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<header>-->
+<!--    <h1>Gestion de Vente</h1>-->
+<!--</header>-->
+
+<!--<nav>-->
+<!--    <a href="#">Accueil</a>-->
+<!--    <a href="#">Produits</a>-->
+<!--    <a href="#">Clients</a>-->
+<!--    <a href="#">Commandes</a>-->
+<!--    <a href="#">Statistiques</a>-->
+<!--</nav>-->
+
+<!--<section>-->
+<!--    <h1>Liste des Produits</h1>-->
+<!--    <a href="/Products/add" class="button">Ajouter un Produit</a>-->
+<!--    <table>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>ID</th>-->
+<!--            <th>Description</th>-->
+<!--            <th>Designation</th>-->
+<!--            <th>Photo</th>-->
+<!--            <th>Price</th>-->
+<!--            <th>Quantity</th>-->
+<!--            <th>Selected</th>-->
+<!--            <th>Catégorie</th>-->
+<!--            <th>Actions</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="product : ${products}">-->
+<!--            <td th:text="${product.id_produit}"></td>-->
+
+<!--            <td th:text="${product.description}">Description</td>-->
+<!--            <td th:text="${product.designation}">Designation</td>-->
+<!--            <td>-->
+<!--                <img th:src="${product.photo}" alt="Photo du produit" style="max-width: 100px; max-height: 100px;">-->
+<!--            </td>-->
+<!--            <td th:text="${product.prix}">Price</td>-->
+<!--            <td th:text="${product.quantite}">Quantity</td>-->
+<!--            <td th:text="${product.selected}">Selected</td>-->
+<!--            <td th:text="${product.category != null ? product.category.name : 'N/A'}">Catégorie</td>-->
+
+<!--            <td>-->
+<!--                <a th:href="@{'/products/edit_product/' + ${product.id}}">Modifier</a>-->
+<!--                <a th:href="@{'/products/delete_product/' + ${product.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')">Supprimer</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+<!--    <a href="/personal">Quitter</a>-->
+<!--</section>-->
+
+<!--<footer>-->
+<!--    <p>&copy; 2024 Gestion de Vente. Tous droits réservés.</p>-->
+<!--</footer>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produits - Gestion de Vente</title>
+    <style>
+        /* Styles pour l'organisation */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #f4f4f4;
+            padding: 10px 20px;
+            overflow: hidden;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-right: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        /* Styles spécifiques à l'interface de gestion de vente */
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Gestion de Vente</h1>
+</header>
+
+<nav>
+    <a href="#">Accueil</a>
+    <a href="#">Produits</a>
+    <a href="#">Clients</a>
+    <a href="#">Commandes</a>
+    <a href="#">Statistiques</a>
+</nav>
+
+<section>
+    <h1>Liste des Produits</h1>
+    <a href="/Products/addProduct" class="button">Ajouter un Produit</a>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Référence</th>
+            <th>Prix</th>
+            <th>Quantité en Stock</th>
+            <th>Catégorie</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}">Nom</td>
+            <td th:text="${product.reference}">Référence</td>
+            <td th:text="${product.price}">Prix</td>
+            <td th:text="${product.quantityInStock}">Quantité en Stock</td>
+            <td th:text="${product.category != null ? product.category.name : 'N/A'}">Catégorie</td>
+            <td>
+                <img th:src="${product.photo}" alt="Photo du produit" style="max-width: 100px; max-height: 100px;">
+            </td>
+            <td>
+                <a th:href="@{'/Products/editProduct/' + ${product.id}}">Modifier</a>
+                <a th:href="@{'/Products/deleteProduct/' + ${product.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?')">Supprimer</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/Products/personal">Quitter</a>
+</section>
+
+<footer>
+    <p>&copy; 2024 Gestion de Vente. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>

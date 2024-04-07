@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des commandes</title>
+</head>
+<body>
+<h2>Liste des commandes</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID de commande</th>
+        <th>Date de commande</th>
+        <th>Montant total</th>
+        <th>Statut de la commande</th>
+        <th>Méthode de paiement</th>
+        <th>Adresse de livraison</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.orderDate}"></td>
+        <td th:text="${order.totalAmount}"></td>
+        <td th:text="${order.orderStatus}"></td>
+        <td th:text="${order.paymentMethod}"></td>
+        <td th:text="${order.deliveryAddress}"></td>
+        <td>
+            <a th:href="@{/orders/edit/{id}(id=${order.id})}">Modifier</a>
+            <a th:href="@{/orders/delete/{id}(id=${order.id})}">Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/orders/add">Ajouter une commande</a>
+</body>
+</html>

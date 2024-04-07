@@ -1,0 +1,73 @@
+package com.mycompany.product.model;
+
+import com.mycompany.product.model.Role;
+
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
+
+import java.io.Serializable;
+import java.util.Collection;
+
+@Entity
+@Table(name="users")
+public class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="user_id")
+    private Long idUser;
+    @Column(name="user_name")
+    private String userName;
+    @Nullable
+    private String adresse;
+    private String email;
+    @Nullable
+    private String tel;
+    private String password;
+    private String role;
+    private boolean actived;
+
+    @Nullable
+    @OneToMany(mappedBy="client")
+    private Collection<Commande> commandes;
+    public Long getIdUser() {
+        return idUser;
+    }
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
+    }
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public boolean isActived() {
+        return actived;
+    }
+    public void setActived(boolean actived) {
+        this.actived = actived;
+    }
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+    public User() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+    public User(String userName, String password, boolean actived) {
+        super();
+        this.userName = userName;
+        this.password = password;
+        this.actived = actived;
+    }
+
+}

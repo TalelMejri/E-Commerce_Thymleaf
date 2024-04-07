@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier une commande</title>
+</head>
+<body>
+<h2>Modifier une commande</h2>
+<form th:action="@{/orders/edit}" th:object="${order}" method="post">
+    <input type="hidden" >
+    <label>Date de commande:</label>
+    <input type="text"  required><br>
+    <label>Montant total:</label>
+    <input type="text"  required><br>
+    <label>Statut de la commande:</label>
+    <input type="text"  required><br>
+    <label>Méthode de paiement:</label>
+    <input type="text"  required><br>
+    <label>Adresse de livraison:</label>
+    <input type="text"  required><br>
+    <button type="submit">Modifier</button>
+</form>
+</body>
+</html>

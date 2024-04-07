@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Supprimer une catégorie</title>
+</head>
+<body>
+<h2>Confirmation de suppression</h2>
+<p>Êtes-vous sûr de vouloir supprimer cette catégorie ?</p>
+
+    <p>Nom: <strong th:text="${category.name}"></strong></p>
+    <p>Référence: <strong th:text="${category.reference}"></strong></p>
+
+    <form action="/categories/delete/{id}" method="post">
+        <input type="hidden" name="id" th:value="${category.id}">
+        <button type="submit">Confirmer la Suppression</button>
+    </form>
+    <a href="/categories/list_category">Retour à la liste des produits</a>
+
+
+</body>
+</html>
