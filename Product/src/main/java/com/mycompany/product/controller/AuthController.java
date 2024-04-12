@@ -19,7 +19,9 @@ import com.mycompany.product.config.SecurityConfig;
 import com.mycompany.product.config.UserDetailsServiceImpl;
 import com.mycompany.product.model.Category;
 import com.mycompany.product.model.Credentials;
+import com.mycompany.product.model.Product;
 import com.mycompany.product.model.User;
+import com.mycompany.product.repository.ProductRepository;
 import com.mycompany.product.repository.UserRepository;
 import com.mycompany.product.service.CategoryServiceImpl;
 import com.mycompany.product.service.UserService;
@@ -43,10 +45,14 @@ public class AuthController {
 	
 	@Autowired
 	UserService userServiceTest;
+	@Autowired
+	ProductRepository productRepo;
 	
 	 @GetMapping("/")
-	 public String index() {
-		  return "index"; 
+	 public String index(Model model) {
+		 List<Product> products=productRepo.findAll();
+		 model.addAttribute("products",products);
+		 return "index"; 
 	 }
 	 
 	 @GetMapping("/login")

@@ -1,8 +1,11 @@
 package com.mycompany.product.service;
 
+import com.mycompany.product.model.Category;
 import com.mycompany.product.model.Product;
 import com.mycompany.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +17,10 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public Page<Product> getAllProducts(String mc,int page,int size) {
+    	Page<Product> products;
+    	products = productRepository.findByNameContains(mc, PageRequest.of(page, size));
+        return products;
     }
 
     @Override

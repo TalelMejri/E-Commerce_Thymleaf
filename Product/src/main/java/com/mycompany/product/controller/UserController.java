@@ -1,6 +1,7 @@
 package com.mycompany.product.controller;
 
 import com.mycompany.product.model.User;
+import com.mycompany.product.repository.UserRepository;
 import com.mycompany.product.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -17,13 +20,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepo;;
+    
     @GetMapping("/list")
     public String listUsers(Model model) {
-        List<User> users = userService.getAllUsers();
+        List<User> users =userRepo.getUsers();
         model.addAttribute("users", users);
-        return "list_users"; 
+        return "admin/Users/List_Users"; 
     }
 
+    @GetMapping("/logout")
+    public String Logout( HttpServletResponse response) {
+    	Cookie cookie=new Cookie("UserId",null);
+		cookie.setHttpOnly(false);
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+    	return "redirect:/";
+    }
 
 
     @PostMapping("/add")
@@ -50,9 +64,9 @@ public class UserController {
         return "redirect:/users/list"; 
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable Long id) {
+    @GetMapping("/delete")
+    public String deleteUser(Long id) {
         userService.deleteUser(id);
-        return "redirect:/users/list"; 
+        return "admin/Users/List_Users";  
     }
 }
