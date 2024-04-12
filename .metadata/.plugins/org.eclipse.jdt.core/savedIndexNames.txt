@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INDEX VERSION 1.131+C:\Users\talel\Downloads\Compressed\Product\.metadata\.plugins\org.eclipse.jdt.core
 1534017912.index
 4038546451.index
@@ -125,3 +126,6 @@ INDEX VERSION 1.131+C:\Users\talel\Downloads\Compressed\Product\.metadata\.plugi
 842102915.index
 3884171063.index
 267093208.index
+=======
+INDEX VERSION 1.131+C:\Users\ghass\Desktop\commerce\E-Commerce_Thymleaf\.metadata\.plugins\org.eclipse.jdt.core
+>>>>>>> 39166cd88dabb66dadf25239ff69d6a58e9ebe69

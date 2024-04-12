@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 GitRepositoriesView.GitDirectories=C\:\\Users\\talel\\Downloads\\Compressed\\Product\\.git;
+=======
+GitRepositoriesView.GitDirectories=C\:\\Users\\ghass\\Desktop\\commerce\\E-Commerce_Thymleaf\\.git;
+>>>>>>> 39166cd88dabb66dadf25239ff69d6a58e9ebe69
 GitRepositoriesView.GitDirectories.relative=.git;
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1

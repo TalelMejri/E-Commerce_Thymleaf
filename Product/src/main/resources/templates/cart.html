@@ -21,6 +21,10 @@
         th {
             background-color: #f2f2f2;
         }
+       .d-flex{
+       display: flex;
+       flex-direction: row;
+       }
     </style>
 </head>
 <body>
@@ -47,32 +51,102 @@
             </div>
         </nav>
 <section style="height:auto;min-height:80vh">
+<div >
 <table>
-    <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Total</th>
-        <th>Action</th>
-    </tr>
-    <!-- Use server-side code to dynamically populate this table -->
-    <tr>
-        <td>Product Name</td>
-        <td>2</td>
-        <td>$20.00</td>
-        <td>$40.00</td>
-        <td><button>Delete</button></td>
-    </tr>
-    <!-- Add more rows dynamically based on the number of items in the shopping cart -->
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="cartItemsContainer">
+    
+    </tbody>
 </table>
-<p>Total: $40.00</p>
-<form action="/checkout" method="post">
-    <button type="submit">Checkout</button>
+</div>
+<div class="d-flex">
+<div id="total" style="margin:20px 20px 20px 20px;">
+</div>
+<form action="/cart" method="post" id="checkoutForm" style="margin:25px">
+	<input type="hidden" id="cartItemsInput" name="cartItems">
+    <button type="submit" th:onclick="clearCart()" class="btn btn-success" id="commandeButton">Commande</button>
 </form>
+</div>
 </section>
 
 <footer class="py-5 bg-dark">
    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
 </footer>
 </body>
+<script>
+	
+	function getCart() {
+	    let cart = localStorage.getItem('cart');
+	    return cart ? JSON.parse(cart) : {};
+	}
+	function isCart(){
+		let cart = localStorage.getItem('cart');
+		return cart ? true:false;
+	}
+	document.addEventListener('DOMContentLoaded', function() {
+	    let cartItems = getCart();
+	    let cartItemsJson = JSON.stringify(cartItems);
+	    const commandeButton = document.getElementById('commandeButton');
+	    const cartElement = document.querySelector('#cartItemsContainer');
+	    document.getElementById('cartItemsInput').value = cartItemsJson;
+	    console.log('Encoded cartItems:', cartItemsJson);
+	    if (cartElement && cartItems.length > 0) {
+	        cartItems.forEach(item => {
+	            let row = document.createElement('tr');
+	            row.innerHTML = `
+	                <td>${item.name}</td>
+	                <td>${item.price}</td>
+	                <td>${item.quantity}</td>
+	                <td><button onclick="deleteCartItem('${item.name}')" class="btn btn-danger">Delete</button></td>
+	            `;
+	            cartElement.appendChild(row);
+	        });
+	    }else{
+	    	let row = document.createElement('tr');
+	    	row.innerHTML = `
+	    		 <td colspan="4" class="text-center">
+                	<p class="no-data mt-3" style="font-size:20px;">No products available</p>
+            	 </td>
+            `;
+            cartElement.appendChild(row);
+            commandeButton.disabled = true;
+	    }
+	    let total = getTotal();
+	    const totalElement = document.querySelector('#total')
+		if(totalElement){
+			totalElement.innerHTML = `<h2>Total: ${total} $</h2>`;
+		}
+	});
+
+	
+	function deleteCartItem(itemName) {
+	    let cart = getCart();
+	    let updatedCart = cart.filter(item => item.name != itemName);
+	    localStorage.setItem('cart', JSON.stringify(updatedCart));
+	    getTotal();
+	    location.reload(); 
+	}
+	
+	function getTotal(){
+		let cart = localStorage.getItem('cart');
+	    if (cart) {
+	        let cartItems = JSON.parse(cart);
+	        let total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+	        return total.toFixed(2);
+	    } else {
+	        return 0;
+	    }
+	}
+	
+	function clearCart() {
+	    localStorage.removeItem('cart');
+	}
+</script>
 </html>
