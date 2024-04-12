@@ -1,5 +1,0 @@
-package com.mycompany.product.repository;
-
-public interface LigneCommandeRepo {
-
-}
