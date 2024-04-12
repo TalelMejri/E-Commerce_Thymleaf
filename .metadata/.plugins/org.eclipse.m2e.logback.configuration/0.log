@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 2024-04-06 01:10:24,995 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
 2024-04-06 01:10:38,881 [Worker-1: Update Maven projects configuration] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
 2024-04-06 01:10:42,344 [Worker-1: Update Maven projects configuration] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-parent/3.2.4/spring-boot-starter-parent-3.2.4.pom
@@ -5830,4 +5830,3 @@ org.eclipse.core.runtime.CoreException: Could not read maven project
 2024-04-10 23:59:03,657 [Worker-36: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2024-04-10 23:59:03,657 [Worker-36: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2024-04-10 23:59:03,657 [Worker-36: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ghass\Desktop\E-Commerce\E-Commerce_Thymleaf\Product\src\test\resources
->>>>>>> be2ab0c7ab028a515c6ac816772a47d4f864341c
