@@ -1,9 +1,0 @@
-//package com.mycompany.product.repository;
-//
-//import com.mycompany.product.model.Produit;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//import org.springframework.stereotype.Repository;
-//
-//@Repository
-//public interface ProduitRepository extends JpaRepository<Produit, Long> {
-//}
