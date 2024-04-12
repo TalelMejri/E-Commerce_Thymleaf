@@ -21,6 +21,10 @@
         th {
             background-color: #f2f2f2;
         }
+       .d-flex{
+       display: flex;
+       flex-direction: row;
+       }
     </style>
 </head>
 <body>
@@ -47,24 +51,29 @@
             </div>
         </nav>
 <section style="height:auto;min-height:80vh">
+<div >
 <table>
     <thead>
         <tr>
             <th>Product Name</th>
-            <th>Quantity</th>
             <th>Price</th>
+            <th>Quantity</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody id="cartItemsContainer">
-        
+    
     </tbody>
 </table>
-<div id="total">
 </div>
-<form action="/checkout" method="post">
-    <button type="submit">Checkout</button>
+<div class="d-flex">
+<div id="total" style="margin:20px 20px 20px 20px;">
+</div>
+<form action="/cart" method="post" id="checkoutForm" style="margin:25px">
+	<input type="hidden" id="cartItemsInput" name="cartItems">
+    <button type="submit" th:onclick="clearCart()" class="btn btn-success" id="commandeButton">Commande</button>
 </form>
+</div>
 </section>
 
 <footer class="py-5 bg-dark">
@@ -72,29 +81,42 @@
 </footer>
 </body>
 <script>
+	
 	function getCart() {
 	    let cart = localStorage.getItem('cart');
 	    return cart ? JSON.parse(cart) : {};
 	}
-	
+	function isCart(){
+		let cart = localStorage.getItem('cart');
+		return cart ? true:false;
+	}
 	document.addEventListener('DOMContentLoaded', function() {
 	    let cartItems = getCart();
-	    console.log(cartItems);
-	
-	  
+	    let cartItemsJson = JSON.stringify(cartItems);
+	    const commandeButton = document.getElementById('commandeButton');
 	    const cartElement = document.querySelector('#cartItemsContainer');
-		
-	    if (cartElement) {
+	    document.getElementById('cartItemsInput').value = cartItemsJson;
+	    console.log('Encoded cartItems:', cartItemsJson);
+	    if (cartElement && cartItems.length > 0) {
 	        cartItems.forEach(item => {
 	            let row = document.createElement('tr');
 	            row.innerHTML = `
 	                <td>${item.name}</td>
-	                <td>${item.quantity}</td>
 	                <td>${item.price}</td>
-	                <td><button onclick="deleteCartItem('${item.name}')">Delete</button></td>
+	                <td>${item.quantity}</td>
+	                <td><button onclick="deleteCartItem('${item.name}')" class="btn btn-danger">Delete</button></td>
 	            `;
 	            cartElement.appendChild(row);
 	        });
+	    }else{
+	    	let row = document.createElement('tr');
+	    	row.innerHTML = `
+	    		 <td colspan="4" class="text-center">
+                	<p class="no-data mt-3" style="font-size:20px;">No products available</p>
+            	 </td>
+            `;
+            cartElement.appendChild(row);
+            commandeButton.disabled = true;
 	    }
 	    let total = getTotal();
 	    const totalElement = document.querySelector('#total')
@@ -121,6 +143,10 @@
 	    } else {
 	        return 0;
 	    }
+	}
+	
+	function clearCart() {
+	    localStorage.removeItem('cart');
 	}
 </script>
 </html>
