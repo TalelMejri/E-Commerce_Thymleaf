@@ -19,7 +19,6 @@
 <fullyQualifiedTypeName name="javax.persistence.Column"/>
 <fullyQualifiedTypeName name="com.sun.istack.Nullable"/>
 <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
-<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.config.EnableJpaRepositories"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
 <fullyQualifiedTypeName name="com.mycompany.product.model.User"/>
 <fullyQualifiedTypeName name="com.mycompany.product.repository.UserRepository"/>
@@ -35,7 +34,6 @@
 <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetails"/>
 <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="com.mycompany.product.model.Category"/>
 <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartFile"/>
 <fullyQualifiedTypeName name="java.nio.file.Files"/>
 <fullyQualifiedTypeName name="java.nio.file.StandardCopyOption"/>
@@ -44,4 +42,8 @@
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
+<fullyQualifiedTypeName name="net.minidev.json.JSONObject"/>
+<fullyQualifiedTypeName name="com.mycompany.product.model.Category"/>
+<fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.config.EnableJpaRepositories"/>
 </qualifiedTypeNameHistroy>

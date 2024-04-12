@@ -24,6 +24,8 @@ import com.mycompany.product.repository.UserRepository;
 import com.mycompany.product.service.CategoryServiceImpl;
 import com.mycompany.product.service.UserService;
 
+import net.minidev.json.JSONObject;
+
 @Controller
 public class AuthController {
 	
@@ -82,16 +84,15 @@ public class AuthController {
 			}
 			UserDetails user_det=userservice.loadUserByUsername(auth.getEmail());
 			User user=userRepo.getUserByemail(auth.getEmail());
-			Cookie cookie=new Cookie("isAuth","true");
+		
+			Cookie cookie=new Cookie("UserId",user.getIdUser().toString());
 			cookie.setHttpOnly(false);
 			cookie.setPath("/");
 			cookie.setSecure(false);
 			cookie.setMaxAge(-1);
 			response.addCookie(cookie); 
 			if(user.getRole().compareTo("Admin")==0) {
-				List<Category> categories = categoryService.getAllCategories();
-		        model.addAttribute("categories", categories);
-				return "admin/ListCat";
+				return "redirect:categories/list_category";
 			}else {
 				return "redirect:/";
 			}

@@ -1,6 +1,7 @@
 package com.mycompany.product.service;
 
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import com.mycompany.product.model.Category;
 import com.mycompany.product.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,10 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    public Page<Category> getAllCategories(String mc,int page,int size) {
+    	Page<Category> categories;
+    	categories = categoryRepository.findByNameContains(mc, PageRequest.of(page, size));
+        return categories;
     }
 
     @Override
