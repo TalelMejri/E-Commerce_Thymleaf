@@ -30,7 +30,7 @@ public class ProductController {
     @GetMapping("/addProduct")
     public String showAddProductForm(Model model) {
         model.addAttribute("product", new Product());
-        model.addAttribute("categories", categoryService.getAllCategories()); // Récupérer toutes les catégories
+       // model.addAttribute("categories", categoryService.getAllCategories()); // Récupérer toutes les catégories
         return "Products/addProduct";
     }
 
@@ -45,7 +45,7 @@ public class ProductController {
     public String showEditProductForm(@PathVariable("id") Long id, Model model) {
         Product product = productService.getProductById(id);
         model.addAttribute("product", product);
-        model.addAttribute("categories", categoryService.getAllCategories()); // Récupérer toutes les catégories
+        //model.addAttribute("categories", categoryService.getAllCategories()); // Récupérer toutes les catégories
         if(product != null) {
             model.addAttribute("product", product);
             return "Products/editProduct";

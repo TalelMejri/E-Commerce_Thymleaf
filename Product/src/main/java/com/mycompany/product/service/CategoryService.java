@@ -4,8 +4,10 @@ import com.mycompany.product.model.Category;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 public interface CategoryService {
-    List<Category> getAllCategories();
+    Page<Category> getAllCategories(String mc,int page,int size);
     Category getCategoryById(Long id);
     Category createCategory(Category category);
     Category saveCategory(Category category);
