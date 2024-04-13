@@ -2,9 +2,13 @@ package com.mycompany.product.controller;
 
 
 import com.mycompany.product.model.Category;
+import com.mycompany.product.model.User;
 import com.mycompany.product.service.CategoryServiceImpl;
+import com.mycompany.product.service.UserServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,19 +21,34 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
+@EnableWebSecurity
 @RequestMapping("/categories")
 public class CategoryController {
 
     @Autowired
     private CategoryServiceImpl categoryService;
+    
+    @Autowired
+    private UserServiceImpl usereService;
 
     @GetMapping("/list_category")
     public String listCategories(Model model, @RequestParam(name = "search", defaultValue = "") String mc,
 			@RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "per_page", defaultValue = "2") int size,
-			@RequestParam(name = "message", defaultValue = "") String message) {
-    	
+			@RequestParam(name = "message", defaultValue = "") String message,HttpServletRequest request) {
+    	try {
+    		Boolean isauth=usereService.ISAuth(request);
+        	User user=usereService.UserAuth(request);
+        	if(!isauth && user.getRole()!="Admin") {
+        		return "redirect:/";
+        	}
+    	}catch (Exception e) {
+    		return "redirect:/";
+		}
+  
         Page<Category> categories = categoryService.getAllCategories(mc,page,size);
         int totale = categories.getTotalPages();
 		int[] count_page = new int[totale];
@@ -53,7 +72,17 @@ public class CategoryController {
     }
 
     @PostMapping("/add_category")
-    public String categories(@ModelAttribute("category") Category category, @RequestParam("photo") MultipartFile photo) {
+    public String categories(@ModelAttribute("category") Category category, @RequestParam("photo") MultipartFile photo,HttpServletRequest request) {
+    	try {
+    		Boolean isauth=usereService.ISAuth(request);
+        	User user=usereService.UserAuth(request);
+        	if(!isauth && user.getRole()!="Admin") {
+        		return "redirect:/";
+        	}
+    	}catch (Exception e) {
+    		return "redirect:/";
+		}
+    	
     	try {
 			if (photo.getOriginalFilename() == "") {
 				return "categories/add_category";
@@ -71,7 +100,16 @@ public class CategoryController {
     }
 
     @GetMapping("/edit_category")
-    public String showEditCategoryForm( Long id, Model model) {
+    public String showEditCategoryForm( Long id, Model model,HttpServletRequest request) {
+    	try {
+    		Boolean isauth=usereService.ISAuth(request);
+        	User user=usereService.UserAuth(request);
+        	if(!isauth && user.getRole()!="Admin") {
+        		return "redirect:/";
+        	}
+    	}catch (Exception e) {
+    		return "redirect:/";
+		}
         Category category = categoryService.getCategoryById(id);
         if(category != null) {
             model.addAttribute("category", category);

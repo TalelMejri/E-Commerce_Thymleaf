@@ -7,6 +7,7 @@ import com.mycompany.product.service.CategoryService;
 import com.mycompany.product.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Controller
+@EnableWebSecurity
 @RequestMapping("/Products")
 public class ProductController {
 

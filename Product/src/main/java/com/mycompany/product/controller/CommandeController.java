@@ -30,6 +30,7 @@ import com.mycompany.product.repository.LigneCommandeRepo;
 import com.mycompany.product.repository.ProductRepository;
 import com.mycompany.product.repository.UserRepository;
 import com.mycompany.product.service.CommandeService;
+import com.mycompany.product.service.UserServiceImpl;
 
 
 @Controller
@@ -49,7 +50,8 @@ public class CommandeController {
 	 
 	 @Autowired
 	 private UserRepository userRepo;
-	 
+	 @Autowired
+	    private UserServiceImpl usereService;
 	 
 	 @PostMapping("/cart")
 	 public String passCommande(@RequestParam("cartItems") String cartItems , HttpServletRequest request) {
@@ -103,7 +105,16 @@ public class CommandeController {
 	 }
 
 	 @GetMapping("/list")
-	    public String listCommandes(Model model , @RequestParam(name = "status", defaultValue ="0") int status) {
+	    public String listCommandes(Model model , @RequestParam(name = "status", defaultValue ="0") int status,HttpServletRequest request) {
+		 try {
+	    		Boolean isauth=usereService.ISAuth(request);
+	        	User user=usereService.UserAuth(request);
+	        	if(!isauth && user.getRole()!="Admin") {
+	        		return "redirect:/";
+	        	}
+	    	}catch (Exception e) {
+	    		return "redirect:/";
+			}
 		 List<Commande> commandes =commandeRepo.getCommandes(status);
 		 List<Integer> statusOptions = Arrays.asList(0,1);
 		    model.addAttribute("statusOptions", statusOptions);

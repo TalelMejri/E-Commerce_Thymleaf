@@ -65,14 +65,11 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	public void configure(HttpSecurity http) {
 		try {
 			http.cors().and().csrf().disable().authorizeRequests()
-			 .antMatchers("/**").permitAll();
-			//anyRequest().authenticated();
-					
+	            .antMatchers("/**").permitAll()
+	            .anyRequest().authenticated();
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	
 
 }

@@ -4,6 +4,7 @@ package com.mycompany.product.controller;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +50,11 @@ public class AuthController {
 	ProductRepository productRepo;
 	
 	 @GetMapping("/")
-	 public String index(Model model) {
+	 public String index(Model model,HttpServletRequest request) {
+		 Boolean isAuth=userServiceTest.ISAuth(request);
 		 List<Product> products=productRepo.findAll();
 		 model.addAttribute("products",products);
+		 model.addAttribute("isAuth",isAuth);
 		 return "index"; 
 	 }
 	 
@@ -68,6 +71,17 @@ public class AuthController {
 		  User user = new User();
 		  model.addAttribute("user", user);
 		  return "register_page"; 
+	 }
+	 
+	 @GetMapping("/deconnecter")
+	 public String logout(HttpServletResponse response) {
+		   userServiceTest.ClearCookie(response);
+		   return "redirect:/logout-page";
+	 }
+	 
+	 @GetMapping("/logout-page")
+	 public String logoutPage() {
+	     return "logout"; 
 	 }
 	 
 	 @PostMapping("/RegisterUser")
@@ -95,7 +109,7 @@ public class AuthController {
 			cookie.setHttpOnly(false);
 			cookie.setPath("/");
 			cookie.setSecure(false);
-			cookie.setMaxAge(-1);
+			cookie.setMaxAge(3600);//1hr
 			response.addCookie(cookie); 
 			if(user.getRole().compareTo("Admin")==0) {
 				return "redirect:categories/list_category";

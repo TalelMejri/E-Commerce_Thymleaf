@@ -30,16 +30,6 @@ public class UserController {
         return "admin/Users/List_Users"; 
     }
 
-    @GetMapping("/logout")
-    public String Logout( HttpServletResponse response) {
-    	Cookie cookie=new Cookie("UserId",null);
-		cookie.setHttpOnly(false);
-		cookie.setMaxAge(0);
-		response.addCookie(cookie);
-    	return "redirect:/";
-    }
-
-
     @PostMapping("/add")
     public String addUserSubmit(@ModelAttribute User user) {
         userService.addUser(user);
