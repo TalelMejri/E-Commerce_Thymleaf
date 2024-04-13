@@ -15,7 +15,7 @@ background-color: whitesmoke;}
  	<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;height: 100vh;">
     <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-4">Admin</span>
+      <span class="fs-4 text-black">Admin</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -31,6 +31,10 @@ background-color: whitesmoke;}
         <a  th:href="@{/users/list}" class="nav-link active mt-2" aria-current="page">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Users
+        </a> 
+        <a  th:href="@{/commande/list}" class="nav-link active mt-2" aria-current="page">
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+          Commandes
         </a>
       </li>
     </ul>
@@ -73,9 +77,9 @@ background-color: whitesmoke;}
         <td>
             <a class="btn btn-warning" th:href="@{/categories/edit_category(id=${category.id})}">Modifier</a>
 
-<button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#exampleModal'+${category.id}">
-  Delete
-</button>
+		<button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#exampleModal'+${category.id}">
+		  Delete
+		</button>
 <!-- Modal -->
 <div class="modal fade"  th:id="'exampleModal'+${category.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

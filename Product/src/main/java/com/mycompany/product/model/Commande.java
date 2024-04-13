@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.ColumnDefault;
+
 @Entity
 public class Commande implements Serializable {
     @Id
@@ -25,13 +27,24 @@ public class Commande implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idClient")
     private User client;
-
+    
+    @ColumnDefault("0")
+    private int status;
+    
     public Long getIdCommande() {
         return idCommande;
     }
 
     public void setIdCommande(Long idCommande) {
         this.idCommande = idCommande;
+    }
+    
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Date getDateCommande() {

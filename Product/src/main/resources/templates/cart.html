@@ -69,7 +69,7 @@
 <div class="d-flex">
 <div id="total" style="margin:20px 20px 20px 20px;">
 </div>
-<form action="/cart" method="post" id="checkoutForm" style="margin:25px">
+<form action="/commande/cart" method="post" id="checkoutForm" style="margin:25px">
 	<input type="hidden" id="cartItemsInput" name="cartItems">
     <button type="submit" th:onclick="clearCart()" class="btn btn-success" id="commandeButton">Commande</button>
 </form>

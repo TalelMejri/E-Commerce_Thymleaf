@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <style>
         /* Add CSS styling here */
         table {
@@ -18,31 +21,132 @@
         th {
             background-color: #f2f2f2;
         }
+       .d-flex{
+       display: flex;
+       flex-direction: row;
+       }
     </style>
 </head>
 <body>
-<h1>Shopping Cart</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" th:href="@{/}">Start Bootstrap</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                     <h3>Shopping cart</h3>
+                </div>
+            </div>
+        </nav>
+<section style="height:auto;min-height:80vh">
+<div >
 <table>
-    <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Total</th>
-        <th>Action</th>
-    </tr>
-    <!-- Use server-side code to dynamically populate this table -->
-    <tr>
-        <td>Product Name</td>
-        <td>2</td>
-        <td>$20.00</td>
-        <td>$40.00</td>
-        <td><button>Delete</button></td>
-    </tr>
-    <!-- Add more rows dynamically based on the number of items in the shopping cart -->
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="cartItemsContainer">
+    
+    </tbody>
 </table>
-<p>Total: $40.00</p>
-<form action="/checkout" method="post">
-    <button type="submit">Checkout</button>
+</div>
+<div class="d-flex">
+<div id="total" style="margin:20px 20px 20px 20px;">
+</div>
+<form action="/cart" method="post" id="checkoutForm" style="margin:25px">
+	<input type="hidden" id="cartItemsInput" name="cartItems">
+    <button type="submit" th:onclick="clearCart()" class="btn btn-success" id="commandeButton">Commande</button>
 </form>
+</div>
+</section>
+
+<footer class="py-5 bg-dark">
+   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+</footer>
 </body>
+<script>
+	
+	function getCart() {
+	    let cart = localStorage.getItem('cart');
+	    return cart ? JSON.parse(cart) : {};
+	}
+	function isCart(){
+		let cart = localStorage.getItem('cart');
+		return cart ? true:false;
+	}
+	document.addEventListener('DOMContentLoaded', function() {
+	    let cartItems = getCart();
+	    let cartItemsJson = JSON.stringify(cartItems);
+	    const commandeButton = document.getElementById('commandeButton');
+	    const cartElement = document.querySelector('#cartItemsContainer');
+	    document.getElementById('cartItemsInput').value = cartItemsJson;
+	    console.log('Encoded cartItems:', cartItemsJson);
+	    if (cartElement && cartItems.length > 0) {
+	        cartItems.forEach(item => {
+	            let row = document.createElement('tr');
+	            row.innerHTML = `
+	                <td>${item.name}</td>
+	                <td>${item.price}</td>
+	                <td>${item.quantity}</td>
+	                <td><button onclick="deleteCartItem('${item.name}')" class="btn btn-danger">Delete</button></td>
+	            `;
+	            cartElement.appendChild(row);
+	        });
+	    }else{
+	    	let row = document.createElement('tr');
+	    	row.innerHTML = `
+	    		 <td colspan="4" class="text-center">
+                	<p class="no-data mt-3" style="font-size:20px;">No products available</p>
+            	 </td>
+            `;
+            cartElement.appendChild(row);
+            commandeButton.disabled = true;
+	    }
+	    let total = getTotal();
+	    const totalElement = document.querySelector('#total')
+		if(totalElement){
+			totalElement.innerHTML = `<h2>Total: ${total} $</h2>`;
+		}
+	});
+
+	
+	function deleteCartItem(itemName) {
+	    let cart = getCart();
+	    let updatedCart = cart.filter(item => item.name != itemName);
+	    localStorage.setItem('cart', JSON.stringify(updatedCart));
+	    getTotal();
+	    location.reload(); 
+	}
+	
+	function getTotal(){
+		let cart = localStorage.getItem('cart');
+	    if (cart) {
+	        let cartItems = JSON.parse(cart);
+	        let total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+	        return total.toFixed(2);
+	    } else {
+	        return 0;
+	    }
+	}
+	
+	function clearCart() {
+	    localStorage.removeItem('cart');
+	}
+</script>
 </html>
